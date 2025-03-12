@@ -1,6 +1,4 @@
 [General]
-# Обходная система. Если вы отключите эту опцию, это может вызвать 
-# некоторые системные проблемы, такие как задержка push-уведомлений
 bypass-system = true
 
 # Включить поддержку IPv6. false означает, что не включено, true означает, что включено.
@@ -27,11 +25,13 @@ dns-direct-fallback-proxy = true
 # используя обычный DNS или зашифрованный DNS (например, doh, doq, dot и т. д.). 
 # Некоторые DNS через https поддерживают http3, поэтому попробуйте выполнить запрос и переключиться 
 # на http3, если он поддерживается. Вы можете добавить #no-h3 после ссылки doh, чтобы закрыть ее. 
-# Используются comss dns  (Блокировка рекламы, счетчиков, вредоносных сайтов и фишинга)
+# Используются Adguard DNS с блокировкой рекламы 
 dns-server = https://dns.comss.one/dns-query, tls://dns.comss.one, quic://dns.comss.one
 
-# Альтернативный DNS. Возврат к резервному DNS при сбое разрешения перезаписанного DNS. Если вам нужно указать несколько DNS, их можно разделить запятыми. system означает возврат к системному DNS. Вы можете выбрать альтернативный DOH/DOT — https://github.com/curl/curl/wiki/DNS-over-HTTPS
-fallback-dns-server = https://8.8.8.8/dns-query,https://1.1.1.1/dns-query
+# Альтернативный DNS. Возврат к резервному DNS при сбое разрешения перезаписанного DNS. 
+# Если вам нужно указать несколько DNS, их можно разделить запятыми. system означает возврат к системному DNS. 
+# Вы можете выбрать альтернативный DOH/DOT — https://github.com/curl/curl/wiki/DNS-over-HTTPS
+fallback-dns-server = https://cloudflare-dns.com/dns-query, https://unfiltered.adguard-dns.com/dns-query
 
 # Перезапись DNS. Некоторые устройства или программное обеспечение всегда 
 # используют жестко запрограммированные DNS-серверы, например Netflix отправляет 
@@ -54,7 +54,7 @@ tun-excluded-routes = 10.0.0.0/8,100.64.0.0/10,127.0.0.0/8,169.254.0.0/16,172.16
 tun-included-routes = 
 # Всегда используйте реальный IP-адрес, эта опция требует, чтобы Shadowrocket 
 # обрабатывал DNS-запросы в TUN и возвращал реальный IP-адрес вместо поддельного IP-адреса.
-always-real-ip=time.*.com,ntp.*.com,*.cloudflareclient.com,localhost.sec.qq.com,localhost.ptlogin2.qq.com,localhost.work.weixin.qq.com
+always-real-ip=time.*.com,ntp.*.com,*.cloudflareclient.com
 
 # Пакеты Ping автоматически отвечают
 icmp-auto-reply = true
@@ -71,12 +71,14 @@ udp-policy-not-supported-behaviour = REJECT
 # конфигурация содержит содержимое другой конфигурации a.conf, и текущая конфигурация имеет 
 # более высокий приоритет, чем a.conf. Эта опция предназначена для установления связи 
 # включения между конфигурациями для удовлетворения потребностей одновременного использования нескольких конфигураций.
-include =
-# URL-адрес обновления файла конфигурации
-update-url = https://raw.githubusercontent.com/makar4uk/zapupa/refs/heads/main/myconf.conf
+include = sr_ru_extended.conf
 
-[Proxy Group]
-AUTO = url-test,interval=600,timeout=5,url=https://cp.cloudflare.com/generate_204,policy-regex-filter=*
+# URL-адрес обновления файла конфигурации
+update-url = https://raw.githubusercontent.com/makar4uk/zapupa/refs/heads/main/myconf
+
+# Выбираем наиболее быстрый сервера для прокси
+# [Proxy Group]
+# AUTO = url-test,interval=600,timeout=5,url=https://cp.cloudflare.com/generate_204,policy-regex-filter=*
 
 # Опционально. Добавьте эти адреса в настройках программы Settings → GeoLite2 Database
 # Если у вас нет аккаунта на Maxmind и вы испольузуете финальное правило Proxy или Auto
@@ -84,16 +86,23 @@ AUTO = url-test,interval=600,timeout=5,url=https://cp.cloudflare.com/generate_20
 # asn: https://github.com/P3TERX/GeoLite.mmdb/raw/download/GeoLite2-ASN.mmdb
 
 
-# Список доменов Youtube
-RULE-SET,https://raw.githubusercontent.com/zydou/domain-list-community-converter/refs/heads/surge-rule-set/youtube.txt,PROXY
-# Список доменов Discrod
-RULE-SET,https://raw.githubusercontent.com/zydou/domain-list-community-converter/refs/heads/surge-rule-set/discord.txt,PROXY
-
-RULE-SET,https://raw.githubusercontent.com/misha-tgshv/shadowrocket-configuration-file/refs/heads/main/community.list,PROXY
-
+# Выборочные правила маршрутизации
+[Rule]
+# Список доменов телеграм-чата «Про Shadowrocket на русском»
+RULE-SET,https://raw.githubusercontent.com/misha-tgshv/shadowrocket-configuration-file/refs/heads/release/rules/domains_community.list,PROXY
+# Список доменов refilter
+RULE-SET,https://raw.githubusercontent.com/misha-tgshv/shadowrocket-configuration-file/refs/heads/release/rules/domains_refilter.list,PROXY
+# Список ip-адресов refilter
+RULE-SET,https://raw.githubusercontent.com/misha-tgshv/shadowrocket-configuration-file/refs/heads/release/rules/ips_refilter.list,PROXY,no-resolve
+# Список доменов Discord
+RULE-SET,https://raw.githubusercontent.com/misha-tgshv/shadowrocket-configuration-file/refs/heads/release/rules/domains_discord.list,PROXY
+# Список портов Discord
+RULE-SET,https://raw.githubusercontent.com/helmiau/clashrules/refs/heads/main/shadowrocket/Game_Discord_Ports.list,PROXY
 RULE-SET,https://raw.githubusercontent.com/zydou/domain-list-community-converter/refs/heads/surge-rule-set/intel.txt,PROXY
 DOMAIN,whoer.net,PROXY
 DOMAIN,strava.com,PROXY
+DOMAIN,mywellness.com,PROXY
+DOMAIN,technogym.com,PROXY
 RULE-SET,https://raw.githubusercontent.com/zydou/domain-list-community-converter/refs/heads/surge-rule-set/github.txt,PROXY
 RULE-SET,https://raw.githubusercontent.com/zydou/domain-list-community-converter/refs/heads/surge-rule-set/docker.txt,PROXY
 RULE-SET,https://raw.githubusercontent.com/zydou/domain-list-community-converter/refs/heads/surge-rule-set/tiktok.txt,PROXY
@@ -101,7 +110,5 @@ RULE-SET,https://raw.githubusercontent.com/zydou/domain-list-community-converter
 RULE-SET,https://raw.githubusercontent.com/zydou/domain-list-community-converter/refs/heads/surge-rule-set/spotify.txt,PROXY
 RULE-SET,https://raw.githubusercontent.com/zydou/domain-list-community-converter/refs/heads/surge-rule-set/x.txt,PROXY
 RULE-SET,https://raw.githubusercontent.com/zydou/domain-list-community-converter/refs/heads/surge-rule-set/openai.txt,PROXY
-
-
 # Финальное правило маршрутизации
 FINAL,DIRECT
