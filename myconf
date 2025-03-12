@@ -73,7 +73,7 @@ udp-policy-not-supported-behaviour = REJECT
 # включения между конфигурациями для удовлетворения потребностей одновременного использования нескольких конфигураций.
 include =
 # URL-адрес обновления файла конфигурации
-update-url = https://raw.githubusercontent.com/makar4uk/zapupa/refs/heads/main/tt%2Cai%2Cyt%2Cstrava%2Crkn_blacked.conf
+update-url = https://raw.githubusercontent.com/makar4uk/zapupa/refs/heads/main/myconf.conf
 
 [Proxy Group]
 AUTO = url-test,interval=600,timeout=5,url=https://cp.cloudflare.com/generate_204,policy-regex-filter=*
@@ -85,22 +85,22 @@ AUTO = url-test,interval=600,timeout=5,url=https://cp.cloudflare.com/generate_20
 
 
 # Список доменов Youtube
-RULE-SET,https://github.com/zydou/domain-list-community-converter/blob/surge-rule-set/youtube.txt,PROXY
+RULE-SET,https://raw.githubusercontent.com/zydou/domain-list-community-converter/refs/heads/surge-rule-set/youtube.txt,PROXY
 # Список доменов Discrod
-RULE-SET,https://github.com/zydou/domain-list-community-converter/blob/surge-rule-set/discord.txt,PROXY
+RULE-SET,https://raw.githubusercontent.com/zydou/domain-list-community-converter/refs/heads/surge-rule-set/discord.txt,PROXY
 
 RULE-SET,https://raw.githubusercontent.com/misha-tgshv/shadowrocket-configuration-file/refs/heads/main/community.list,PROXY
 
-RULE-SET,https://github.com/zydou/domain-list-community-converter/blob/surge-rule-set/intel.txt,PROXY
+RULE-SET,https://raw.githubusercontent.com/zydou/domain-list-community-converter/refs/heads/surge-rule-set/intel.txt,PROXY
 DOMAIN,whoer.net,PROXY
 DOMAIN,strava.com,PROXY
-RULE-SET,https://github.com/zydou/domain-list-community-converter/blob/surge-rule-set/github.txt,PROXY
-RULE-SET,https://github.com/zydou/domain-list-community-converter/blob/surge-rule-set/docker.txt,PROXY
-RULE-SET,https://github.com/zydou/domain-list-community-converter/blob/surge-rule-set/tiktok.txt,PROXY
-RULE-SET,https://github.com/zydou/domain-list-community-converter/blob/surge-rule-set/openai.txt,PROXY
-RULE-SET,https://github.com/zydou/domain-list-community-converter/blob/surge-rule-set/spotify.txt,PROXY
-RULE-SET,https://github.com/zydou/domain-list-community-converter/blob/surge-rule-set/x.txt,PROXY
-RULE-SET,https://github.com/zydou/domain-list-community-converter/blob/surge-rule-set/openai.txt,PROXY
+RULE-SET,https://raw.githubusercontent.com/zydou/domain-list-community-converter/refs/heads/surge-rule-set/github.txt,PROXY
+RULE-SET,https://raw.githubusercontent.com/zydou/domain-list-community-converter/refs/heads/surge-rule-set/docker.txt,PROXY
+RULE-SET,https://raw.githubusercontent.com/zydou/domain-list-community-converter/refs/heads/surge-rule-set/tiktok.txt,PROXY
+RULE-SET,https://raw.githubusercontent.com/zydou/domain-list-community-converter/refs/heads/surge-rule-set/openai.txt,PROXY
+RULE-SET,https://raw.githubusercontent.com/zydou/domain-list-community-converter/refs/heads/surge-rule-set/spotify.txt,PROXY
+RULE-SET,https://raw.githubusercontent.com/zydou/domain-list-community-converter/refs/heads/surge-rule-set/x.txt,PROXY
+RULE-SET,https://raw.githubusercontent.com/zydou/domain-list-community-converter/refs/heads/surge-rule-set/openai.txt,PROXY
 
 
 # Финальное правило маршрутизации
