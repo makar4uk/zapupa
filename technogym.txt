@@ -1,0 +1,4 @@
+DOMAIN-SUFFIX,mywellness.com
+DOMAIN-SUFFIX,technogym.com
+DOMAIN,crashlyticsreports-pa.googleapis.com
+DOMAIN,firebaselogging-pa.googleapis.com
